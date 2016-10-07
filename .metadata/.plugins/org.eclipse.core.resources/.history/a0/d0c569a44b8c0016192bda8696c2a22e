@@ -1,0 +1,60 @@
+
+import java.awt.*;
+import javax.swing.*;
+public class Spiral extends JPanel{
+	private static String radTemp;
+	
+	public static void main(String[] args){
+		Spiral spiral = new Spiral();
+		JFrame application = new JFrame();
+		radTemp = JOptionPane.showInputDialog(null, "Please enter the desired radius of the spiral:");
+		
+		
+		
+		application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		application.add(spiral);
+		application.setSize(500,500);
+		application.setVisible(true);
+	}
+	
+	public void paint (Graphics g){
+		double goldenRatio = 1.61803398875;
+		int radius;
+		double e = Math.E;
+		int x = 250;
+		int y = 250;
+		int width = 10;
+		int height = 10;
+		int startAngle = -90;
+		int arcAngle = 180;
+		
+		radius = Integer.parseInt(radTemp);
+		
+		//create x/y axis
+		g.drawLine(250,0, 250, 500);
+		g.drawLine(0, 250, 500, 250);
+		//create "x" and "y"
+		Font f = new Font("Times New Roman", Font.BOLD, 16);
+		g.setFont(f);
+		g.drawString("X", 470, 240);
+		g.drawString("Y", 260, 15);
+		
+		//draw the spiral
+		for(int i = 0; i < 10; i++){
+			if(i % 2 == 0){
+				x -= 10;
+				width += 20;
+				height += 20;
+				g.drawArc(x, y, width, height, startAngle, arcAngle);
+			}
+			else{
+				y -= 20;
+				x -= 10;
+				width += 20;
+				height += 20;
+				g.drawArc(x, y, width, height, startAngle, -arcAngle);
+			}
+		}
+	}
+
+}
